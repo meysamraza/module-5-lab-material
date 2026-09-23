@@ -1,25 +1,44 @@
+LAB 1 — RECON & SCOPE MAPPING
+Labeled CLI Commands for Students
+
+===========================================
+DISCOVERY PHASE
+===========================================
+
+1. EC2 Instance Discovery
 aws ec2 describe-instances --region eu-north-1 --query "Reservations[].Instances[].[InstanceId,State.Name,PublicIpAddress,InstanceType]" --output table
 
+2. S3 Bucket Discovery
 aws s3api list-buckets --query "Buckets[].Name" --output table
 
+3. IAM Roles Discovery
 aws iam list-roles --query "Roles[].[RoleName,CreateDate]" --output table
 
+===========================================
+BASELINE CHECKS
+===========================================
+
+4. Root Access Keys Check (Baseline)
 aws iam get-account-summary --query "SummaryMap.AccountAccessKeysPresent"
 
+5. Public RDS Check (Baseline)
 aws rds describe-db-instances --query "DBInstances[].[DBInstanceIdentifier,PubliclyAccessible]" --output table
 
+6. Public AMI Check (Baseline)
 aws ec2 describe-images --owners self --query "Images[].[ImageId,Public]" --output table
 
+===========================================
+VULNERABILITY VERIFICATION
+===========================================
 
-
-open ports
+7. Open Ports Check (Security Group)
 aws ec2 describe-security-groups --group-ids sg-04f15fbf6ff87a62f --region eu-north-1 --query "SecurityGroups[].IpPermissions"
 
-s3 public
+8. S3 Public Policy Check
 aws s3api get-bucket-policy --bucket pentest-s3-267447890852
 
-IMDS
+9. EC2 IMDS Settings Check
 aws ec2 describe-instances --instance-ids i-0c528b2032cba9aeb --region eu-north-1 --query "Reservations[].Instances[].MetadataOptions"
 
-RDS public + encryption
+10. RDS Public + Encryption Check
 aws rds describe-db-instances --db-instance-identifier pentest-rds --region eu-north-1 --query "DBInstances[].[PubliclyAccessible,StorageEncrypted]"
