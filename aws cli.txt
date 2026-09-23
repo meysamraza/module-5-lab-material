@@ -1,0 +1,25 @@
+aws ec2 describe-instances --region eu-north-1 --query "Reservations[].Instances[].[InstanceId,State.Name,PublicIpAddress,InstanceType]" --output table
+
+aws s3api list-buckets --query "Buckets[].Name" --output table
+
+aws iam list-roles --query "Roles[].[RoleName,CreateDate]" --output table
+
+aws iam get-account-summary --query "SummaryMap.AccountAccessKeysPresent"
+
+aws rds describe-db-instances --query "DBInstances[].[DBInstanceIdentifier,PubliclyAccessible]" --output table
+
+aws ec2 describe-images --owners self --query "Images[].[ImageId,Public]" --output table
+
+
+
+open ports
+aws ec2 describe-security-groups --group-ids sg-04f15fbf6ff87a62f --region eu-north-1 --query "SecurityGroups[].IpPermissions"
+
+s3 public
+aws s3api get-bucket-policy --bucket pentest-s3-267447890852
+
+IMDS
+aws ec2 describe-instances --instance-ids i-0c528b2032cba9aeb --region eu-north-1 --query "Reservations[].Instances[].MetadataOptions"
+
+RDS public + encryption
+aws rds describe-db-instances --db-instance-identifier pentest-rds --region eu-north-1 --query "DBInstances[].[PubliclyAccessible,StorageEncrypted]"
