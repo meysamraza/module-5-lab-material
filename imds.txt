@@ -14,9 +14,3 @@ aws configure set aws_secret_access_key YOUR_SECRET_KEY
 aws configure set aws_session_token YOUR_TOKEN
 aws configure set region eu-north-1
 
-
-aws configure set aws_access_key_id ASIAT4RJC6OSDADAVV3C
-aws configure set aws_secret_access_key dzciQk3GDpOm3IV0s4L0zqn7rN5K9MfBrhjv+DAZ
-aws configure set aws_session_token YOUR_TOKEN
-aws configure set region eu-north-1
-
