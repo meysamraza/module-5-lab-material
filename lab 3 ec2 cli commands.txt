@@ -5,7 +5,7 @@ Labeled Commands for Students
 1. SSH INTO EC2 INSTANCE
 (run from your local machine)
 ===========================================
-ssh -i pentest-key.pem ec2-user@13.49.46.121
+ssh -i pentest-key.pem ec2-user@ip
 
 ===========================================
 2. INSTALL GIT ON EC2
@@ -47,7 +47,7 @@ aws ec2 authorize-security-group-ingress \
 ===========================================
 7. ACCESS APP PUBLICLY (BROWSER)
 ===========================================
-http://13.49.46.121:5000
+http://ip:5000
 
 ===========================================
 8. STOP THE APP (IF NEEDED LATER)
