@@ -1,0 +1,56 @@
+LAB 3 — SSRF EXPLOITATION VIA EC2 WEB APP
+Labeled Commands for Students
+
+===========================================
+1. SSH INTO EC2 INSTANCE
+(run from your local machine)
+===========================================
+ssh -i pentest-key.pem ec2-user@13.49.46.121
+
+===========================================
+2. INSTALL GIT ON EC2
+(run on EC2, if not already installed)
+===========================================
+sudo yum install git -y
+
+===========================================
+3. CLONE THE SSRF LAB APP REPO
+(run on EC2)
+===========================================
+git clone https://github.com/meysamraza/SSRF-repo.git
+cd SSRF-repo
+
+===========================================
+4. RUN THE APP
+(run on EC2, inside SSRF-repo folder)
+===========================================
+chmod +x run.sh
+./run.sh
+
+===========================================
+5. VERIFY APP IS RUNNING LOCALLY
+(run on EC2)
+===========================================
+curl http://localhost:5000
+
+===========================================
+6. OPEN PORT 5000 ON SECURITY GROUP
+(run from your local machine, NOT on EC2)
+===========================================
+aws ec2 authorize-security-group-ingress \
+  --group-id sg-04f15fbf6ff87a62f \
+  --protocol tcp \
+  --port 5000 \
+  --cidr 0.0.0.0/0 \
+  --region eu-north-1
+
+===========================================
+7. ACCESS APP PUBLICLY (BROWSER)
+===========================================
+http://13.49.46.121:5000
+
+===========================================
+8. STOP THE APP (IF NEEDED LATER)
+(run on EC2)
+===========================================
+fuser -k 5000/tcp
